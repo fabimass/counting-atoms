@@ -3,7 +3,7 @@ import Button from './Button'
 const ButtonsPanel = () => {
   
     return (
-      <div className="w-1/2 p-4 text-center border-solid border-2 border-indigo-800">
+      <div className="p-1 text-center border-solid border-2 border-indigo-800 md:w-1/2 md:p-4">
         <Button display={1} />
         <Button display={2} />
         <Button display={3} />

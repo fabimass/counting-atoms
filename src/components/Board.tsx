@@ -4,7 +4,7 @@ import ButtonsPanel from './ButtonsPanel'
 const Board = () => {
 
     return (
-        <div className="flex">
+        <div className="md:flex">
             <AtomsPanel />
             <ButtonsPanel />
         </div>
