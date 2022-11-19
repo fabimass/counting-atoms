@@ -1,5 +1,6 @@
 import AtomsPanel from './AtomsPanel'
 import ButtonsPanel from './ButtonsPanel'
+import { useState } from 'react'
 
 // This function generates the next number of atoms in screen (between 1 and 9)
 const GenerateNewNumber = () => {
@@ -13,7 +14,7 @@ const GenerateNewNumber = () => {
 // This component creates the panel for atoms and numbers and manages the game logic
 const Board = () => {
 
-    const numberOfAtoms: number = GenerateNewNumber()
+    const [numberOfAtoms, setNumberOfAtoms] = useState(GenerateNewNumber())
 
     return (
         <div className="md:flex">

@@ -4,3 +4,9 @@
   padding: 2rem;
   text-align: center;
 }
+
+@media ((min-width: 768px)) {
+  #root {
+    min-width: 700px;
+  }
+}
