@@ -1,27 +1,18 @@
-import AtomsPanel from './AtomsPanel'
-import ButtonsPanel from './ButtonsPanel'
-import { useState } from 'react'
-
-// This function generates the next number of atoms in screen (between 1 and 9)
-const GenerateNewNumber = () => {
-    
-    const max: number = 9
-    const min: number = 1
-
-    return Math.floor(Math.random() * (max - min) ) + min
-}
+import AtomsPanel from "./AtomsPanel";
+import ButtonsPanel from "./ButtonsPanel";
+import { useState } from "react";
+import utils from "../utils";
 
 // This component creates the panel for atoms and numbers and manages the game logic
 const Board = () => {
+  const [numberOfAtoms, setNumberOfAtoms] = useState(utils.random(1, 9));
 
-    const [numberOfAtoms, setNumberOfAtoms] = useState(GenerateNewNumber())
+  return (
+    <div className="md:flex">
+      <AtomsPanel quantity={numberOfAtoms} />
+      <ButtonsPanel />
+    </div>
+  );
+};
 
-    return (
-        <div className="md:flex">
-            <AtomsPanel quantity={numberOfAtoms} />
-            <ButtonsPanel />
-        </div>
-    )
-}
-
-export default Board
+export default Board;
