@@ -11,7 +11,7 @@ const AtomsPanel = (props: AtomsPanelInterface) => {
   const atoms: Array<number> = utils.range(1, props.quantity);
 
   return (
-    <div className="min-h-[280px] p-1 text-center border-solid border-2 border-indigo-800 md:w-1/2 md:p-4 ">
+    <div className="h-[280px] p-1 text-center border-solid border-2 border-slate-700 md:w-1/2">
       {atoms.map((i) => (
         <Atom />
       ))}
