@@ -13,7 +13,7 @@ const AtomsPanel = (props: AtomsPanelInterface) => {
   return (
     <div className="h-[280px] p-1 text-center border-solid border-2 border-slate-700 md:w-1/2">
       {atoms.map((i) => (
-        <Atom />
+        <Atom key={i} />
       ))}
     </div>
   );
