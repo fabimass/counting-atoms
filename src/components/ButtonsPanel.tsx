@@ -5,6 +5,10 @@ interface ButtonsPanelInterface {
   available: number[];
   candidates: number[];
   candidatesAreWrong: boolean;
+  onClickHandle: (
+    num: number,
+    currentStatus: "candidate" | "available" | "used" | "wrong"
+  ) => "ok" | null;
 }
 
 const ButtonsPanel = (props: ButtonsPanelInterface) => {
@@ -28,7 +32,11 @@ const ButtonsPanel = (props: ButtonsPanelInterface) => {
   return (
     <div className="h-[280px] pb-5 text-center border-solid border-2 border-slate-700 md:w-1/2">
       {buttons.map((button) => (
-        <Button display={button} status={buttonStatus(button)} />
+        <Button
+          display={button}
+          status={buttonStatus(button)}
+          onClick={props.onClickHandle}
+        />
       ))}
     </div>
   );

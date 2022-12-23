@@ -1,6 +1,10 @@
 interface ButtonInterface {
   display: number;
   status: "candidate" | "available" | "used" | "wrong";
+  onClick: (
+    num: number,
+    currentStatus: "candidate" | "available" | "used" | "wrong"
+  ) => "ok" | null;
 }
 
 const Button = (props: ButtonInterface) => {
@@ -33,7 +37,10 @@ const Button = (props: ButtonInterface) => {
   };
   return (
     <div className="h-12 w-12 m-5 inline-block">
-      <div className={buttonState(props.status)}>
+      <div
+        className={buttonState(props.status)}
+        onClick={() => props.onClick(props.display, props.status)}
+      >
         <span className="flex flex-col justify-center items-center h-full text-white font-bold text-lg ">
           {props.display}
         </span>

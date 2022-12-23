@@ -12,9 +12,9 @@ const utils = {
 
   // Given an array of numbers and a max...
   // Pick a random sum (< max) from the set of all available sums in arr
-  randomSumIn: (arr, max) => {
-    const sets = [[]];
-    const sums = [];
+  randomSumIn: (arr: number[], max: number) => {
+    const sets: number[][] = [[]];
+    const sums: number[] = [];
     for (let i = 0; i < arr.length; i++) {
       for (let j = 0, len = sets.length; j < len; j++) {
         const candidateSet = sets[j].concat(arr[i]);
