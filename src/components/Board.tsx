@@ -5,6 +5,10 @@ import utils from "../utils";
 
 // This component creates the panel for atoms and numbers and manages the game logic
 const Board = () => {
+  // The state of the game is made up of:
+  //   - The number of atoms to guess
+  //   - The list of available numbers to click
+  //   - The list of candidate numbers (clicked numbers but lower than the number of atoms)
   const [numberOfAtoms, setNumberOfAtoms] = useState<number>(
     utils.random(1, 9)
   );
@@ -21,13 +25,15 @@ const Board = () => {
     num: number,
     currentStatus: "candidate" | "available" | "used" | "wrong"
   ) => {
+    // If the number is already used nothing happens
     if (currentStatus === "used") {
       return null;
     }
 
+    // Temporarily add the clicked number to the list of candidate numbers
     const newCandidateNumbers = candidateNumbers.concat(num);
-    // If the sum of the new candidates equals to the number of atoms, it is a correct match
 
+    // If the sum of the new candidates equals to the number of atoms, it is a correct match
     if (utils.sum(newCandidateNumbers) === numberOfAtoms) {
       // These new candidates should be removed from the available numbers
       const newAvailableNumbers = availableNumbers.filter(
@@ -39,6 +45,7 @@ const Board = () => {
       // And also, we need to update the number of atoms
       setNumberOfAtoms(utils.randomSumIn(newAvailableNumbers, 9));
     } else {
+      // If not, the new number becomes part of the candidates list for good
       setCandidateNumbers(newCandidateNumbers);
     }
 
@@ -47,13 +54,17 @@ const Board = () => {
 
   return (
     <div className="md:flex">
-      <AtomsPanel quantity={numberOfAtoms} />
-      <ButtonsPanel
-        available={availableNumbers}
-        candidates={candidateNumbers}
-        candidatesAreWrong={candidatesAreWrong}
-        onClickHandle={onNumberClick}
-      />
+      <div className="h-[280px] p-1 text-center border-solid border-2 border-slate-700 md:w-1/2">
+        <AtomsPanel quantity={numberOfAtoms} />
+      </div>
+      <div className="h-[280px] pb-5 text-center border-solid border-2 border-slate-700 md:w-1/2">
+        <ButtonsPanel
+          available={availableNumbers}
+          candidates={candidateNumbers}
+          candidatesAreWrong={candidatesAreWrong}
+          onNumberClick={onNumberClick}
+        />
+      </div>
     </div>
   );
 };

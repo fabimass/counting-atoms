@@ -11,11 +11,11 @@ const AtomsPanel = (props: AtomsPanelInterface) => {
   const atoms: number[] = utils.range(1, props.quantity);
 
   return (
-    <div className="h-[280px] p-1 text-center border-solid border-2 border-slate-700 md:w-1/2">
+    <>
       {atoms.map((i) => (
         <Atom key={i} />
       ))}
-    </div>
+    </>
   );
 };
 
