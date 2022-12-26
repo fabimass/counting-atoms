@@ -1,7 +1,7 @@
 import utils from "../utils";
 import Button from "./Button";
 
-interface ButtonsPanelInterface {
+interface IButtonsPanel {
   available: number[];
   candidates: number[];
   candidatesAreWrong: boolean;
@@ -11,7 +11,7 @@ interface ButtonsPanelInterface {
   ) => "ok" | null;
 }
 
-const ButtonsPanel = (props: ButtonsPanelInterface) => {
+const ButtonsPanel = (props: IButtonsPanel) => {
   const buttons = utils.range(1, 9);
 
   const buttonStatus = (num: number) => {

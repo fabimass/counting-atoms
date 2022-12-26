@@ -1,4 +1,4 @@
-interface ButtonInterface {
+interface IPlayButton {
   display: number;
   status: "candidate" | "available" | "used" | "wrong";
   onClick: (
@@ -7,8 +7,8 @@ interface ButtonInterface {
   ) => "ok" | null;
 }
 
-const Button = (props: ButtonInterface) => {
-  const buttonState = (state: ButtonInterface["status"]) => {
+const Button = (props: IPlayButton) => {
+  const buttonState = (state: IPlayButton["status"]) => {
     switch (state) {
       case "wrong":
         return `button h-12
