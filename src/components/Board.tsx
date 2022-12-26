@@ -1,7 +1,8 @@
-import AtomsPanel from "./AtomsPanel";
-import ButtonsPanel from "./ButtonsPanel";
 import { useState } from "react";
 import utils from "../utils";
+import AtomsPanel from "./AtomsPanel";
+import ButtonsPanel from "./ButtonsPanel";
+import PlayAgain from "./PlayAgain";
 
 // This component creates the panel for atoms and numbers and manages the game logic
 const Board = () => {
@@ -20,7 +21,20 @@ const Board = () => {
   // Candidates are wrong if the sum of them is greater than the number of atoms
   const candidatesAreWrong = utils.sum(candidateNumbers) > numberOfAtoms;
 
-  // Game is over if
+  // Game is over if there is no more available buttons
+  const gameStatus =
+    availableNumbers.length === 0
+      ? "Won"
+      : candidatesAreWrong
+      ? "Lost"
+      : "inProgress";
+
+  // Reset game
+  const resetGame = () => {
+    setNumberOfAtoms(utils.random(1, 9));
+    setAvailableNumbers(utils.range(1, 9));
+    setCandidateNumbers([]);
+  };
 
   // Logic behind every click
   const onNumberClick = (
@@ -63,7 +77,14 @@ const Board = () => {
   return (
     <div className="md:flex">
       <div className="h-[280px] p-1 text-center border-solid border-2 border-slate-700 md:w-1/2">
-        <AtomsPanel quantity={numberOfAtoms} />
+        {gameStatus === "inProgress" ? (
+          <AtomsPanel quantity={numberOfAtoms} />
+        ) : (
+          <PlayAgain
+            onClick={resetGame}
+            gameWon={gameStatus === "Won" ? true : false}
+          />
+        )}
       </div>
       <div className="h-[280px] pb-5 text-center border-solid border-2 border-slate-700 md:w-1/2">
         <ButtonsPanel
