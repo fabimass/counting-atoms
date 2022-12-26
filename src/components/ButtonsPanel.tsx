@@ -1,5 +1,5 @@
 import utils from "../utils";
-import Button from "./Button";
+import PlayButton from "./PlayButton";
 
 interface IButtonsPanel {
   available: number[];
@@ -32,7 +32,7 @@ const ButtonsPanel = (props: IButtonsPanel) => {
   return (
     <>
       {buttons.map((button) => (
-        <Button
+        <PlayButton
           key={button}
           display={button}
           status={buttonStatus(button)}

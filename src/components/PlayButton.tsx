@@ -7,7 +7,7 @@ interface IPlayButton {
   ) => "ok" | null;
 }
 
-const Button = (props: IPlayButton) => {
+const PlayButton = (props: IPlayButton) => {
   const buttonState = (state: IPlayButton["status"]) => {
     switch (state) {
       case "wrong":
@@ -52,4 +52,4 @@ const Button = (props: IPlayButton) => {
   );
 };
 
-export default Button;
+export default PlayButton;
