@@ -20,6 +20,8 @@ const Board = () => {
   // Candidates are wrong if the sum of them is greater than the number of atoms
   const candidatesAreWrong = utils.sum(candidateNumbers) > numberOfAtoms;
 
+  // Game is over if
+
   // Logic behind every click
   const onNumberClick = (
     num: number,
@@ -27,6 +29,12 @@ const Board = () => {
   ) => {
     // If the number is already used nothing happens
     if (currentStatus === "used") {
+      return null;
+    }
+
+    // If you click on a candidate you reset it
+    if (currentStatus === "candidate") {
+      setCandidateNumbers(candidateNumbers.filter((n) => !(n === num)));
       return null;
     }
 
@@ -49,7 +57,7 @@ const Board = () => {
       setCandidateNumbers(newCandidateNumbers);
     }
 
-    return "ok";
+    return null;
   };
 
   return (
