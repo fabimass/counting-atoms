@@ -10,6 +10,7 @@ const Board = () => {
   //   - The number of atoms to guess
   //   - The list of available numbers to click
   //   - The list of candidate numbers (clicked numbers but lower than the number of atoms)
+  //   - The amount of time left
   const [numberOfAtoms, setNumberOfAtoms] = useState<number>(
     utils.random(1, 9)
   );
@@ -17,6 +18,7 @@ const Board = () => {
     utils.range(1, 9)
   );
   const [candidateNumbers, setCandidateNumbers] = useState<number[]>([]);
+  const [secondsLeft, setSecondsLeft] = useState<number>(10);
 
   // Candidates are wrong if the sum of them is greater than the number of atoms
   const candidatesAreWrong = utils.sum(candidateNumbers) > numberOfAtoms;
@@ -75,26 +77,36 @@ const Board = () => {
   };
 
   return (
-    <div className="md:flex">
-      <div className="h-[280px] p-1 text-center border-solid border-2 border-slate-700 md:w-1/2">
-        {gameStatus === "inProgress" ? (
-          <AtomsPanel quantity={numberOfAtoms} />
-        ) : (
-          <PlayAgain
-            onClick={resetGame}
-            gameWon={gameStatus === "Won" ? true : false}
+    <>
+      <div className="md:flex">
+        <div className="h-[280px] p-1 text-center border-solid border-2 border-slate-700 md:w-1/2">
+          {gameStatus === "inProgress" ? (
+            <AtomsPanel quantity={numberOfAtoms} />
+          ) : (
+            <PlayAgain
+              onClick={resetGame}
+              gameWon={gameStatus === "Won" ? true : false}
+            />
+          )}
+        </div>
+        <div className="h-[280px] pb-5 text-center border-solid border-2 border-slate-700 md:w-1/2">
+          <ButtonsPanel
+            available={availableNumbers}
+            candidates={candidateNumbers}
+            candidatesAreWrong={candidatesAreWrong}
+            onNumberClick={onNumberClick}
           />
-        )}
+        </div>
       </div>
-      <div className="h-[280px] pb-5 text-center border-solid border-2 border-slate-700 md:w-1/2">
-        <ButtonsPanel
-          available={availableNumbers}
-          candidates={candidateNumbers}
-          candidatesAreWrong={candidatesAreWrong}
-          onNumberClick={onNumberClick}
-        />
+      <div className="relative mx-auto mt-5 md:mt-10 w-16 h-16 md:w-28 md:h-28">
+        <div className="rounded-full animate-spin bg-gradient-to-tr from-[#242424] to-slate-700 w-16 h-16 md:w-28 md:h-28"></div>
+        <div className="absolute top-[12.5%] left-[12.5%] md:top-[7.25%] md:left-[7.25%] h-12 w-12 md:h-24 md:w-24 rounded-full bg-[#242424]">
+          <span className="flex flex-col justify-center items-center h-full text-white font-bold text-lg md:text-3xl">
+            {secondsLeft}
+          </span>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
