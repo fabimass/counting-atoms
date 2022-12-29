@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import utils from "../utils";
 import AtomsPanel from "./AtomsPanel";
 import ButtonsPanel from "./ButtonsPanel";
@@ -27,7 +27,7 @@ const Board = () => {
   const gameStatus =
     availableNumbers.length === 0
       ? "Won"
-      : candidatesAreWrong
+      : candidatesAreWrong || secondsLeft === 0
       ? "Lost"
       : "inProgress";
 
@@ -36,6 +36,7 @@ const Board = () => {
     setNumberOfAtoms(utils.random(1, 9));
     setAvailableNumbers(utils.range(1, 9));
     setCandidateNumbers([]);
+    setSecondsLeft(10);
   };
 
   // Logic behind every click
@@ -76,6 +77,17 @@ const Board = () => {
     return null;
   };
 
+  // Countdown timer
+  useEffect(() => {
+    if (secondsLeft > 0 && !candidatesAreWrong) {
+      const intervalId = setInterval(
+        () => setSecondsLeft((prevCount) => prevCount - 1),
+        1000
+      );
+      return () => clearInterval(intervalId);
+    }
+  }, [secondsLeft, candidatesAreWrong]);
+
   return (
     <>
       <div className="md:flex">
@@ -99,7 +111,13 @@ const Board = () => {
         </div>
       </div>
       <div className="relative mx-auto mt-5 md:mt-10 w-16 h-16 md:w-28 md:h-28">
-        <div className="rounded-full animate-spin bg-gradient-to-tr from-[#242424] to-slate-700 w-16 h-16 md:w-28 md:h-28"></div>
+        <div
+          className={
+            secondsLeft > 0 && !candidatesAreWrong
+              ? "rounded-full animate-spin bg-gradient-to-tr from-[#242424] to-slate-700 w-16 h-16 md:w-28 md:h-28"
+              : "rounded-full bg-gradient-to-tr from-[#242424] to-slate-700 w-16 h-16 md:w-28 md:h-28"
+          }
+        ></div>
         <div className="absolute top-[12.5%] left-[12.5%] md:top-[7.25%] md:left-[7.25%] h-12 w-12 md:h-24 md:w-24 rounded-full bg-[#242424]">
           <span className="flex flex-col justify-center items-center h-full text-white font-bold text-lg md:text-3xl">
             {secondsLeft}
