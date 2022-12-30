@@ -1,5 +1,5 @@
-import Atom from "./Atom";
 import utils from "../utils";
+import Atom from "./Atom";
 
 interface IAtomsPanel {
   quantity: number;
@@ -11,11 +11,11 @@ const AtomsPanel = (props: IAtomsPanel) => {
   const atoms: number[] = utils.range(1, props.quantity);
 
   return (
-    <>
+    <div className="relative">
       {atoms.map((i) => (
-        <Atom key={i} />
+        <Atom key={i} order={i} />
       ))}
-    </>
+    </div>
   );
 };
 

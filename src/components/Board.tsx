@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import utils from "../utils";
+import settings from "../settings";
 import AtomsPanel from "./AtomsPanel";
 import ButtonsPanel from "./ButtonsPanel";
 import PlayAgain from "./PlayAgain";
@@ -18,7 +19,9 @@ const Board = () => {
     utils.range(1, 9)
   );
   const [candidateNumbers, setCandidateNumbers] = useState<number[]>([]);
-  const [secondsLeft, setSecondsLeft] = useState<number>(10);
+  const [secondsLeft, setSecondsLeft] = useState<number>(
+    settings.timeAvailable
+  );
 
   // Candidates are wrong if the sum of them is greater than the number of atoms
   const candidatesAreWrong = utils.sum(candidateNumbers) > numberOfAtoms;
@@ -36,7 +39,7 @@ const Board = () => {
     setNumberOfAtoms(utils.random(1, 9));
     setAvailableNumbers(utils.range(1, 9));
     setCandidateNumbers([]);
-    setSecondsLeft(10);
+    setSecondsLeft(settings.timeAvailable);
   };
 
   // Logic behind every click
