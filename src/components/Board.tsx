@@ -92,7 +92,7 @@ const Board = () => {
   }, [secondsLeft, candidatesAreWrong]);
 
   return (
-    <>
+    <div className="max-w-[700px]">
       <div className="md:flex">
         <div className="h-[280px] p-1 text-center border-solid border-2 border-slate-700 md:w-1/2">
           {gameStatus === "inProgress" ? (
@@ -127,7 +127,7 @@ const Board = () => {
           </span>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

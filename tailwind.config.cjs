@@ -26,8 +26,8 @@ module.exports = {
       },
       keyframes: {
         bouncex: {
-          from: { left: "-20px", top: 0 },
-          to: { left: "240px", top: 0 },
+          from: { left: "-9.5%", top: 0 },
+          to: { left: "80.5%", top: 0 },
         },
         bouncey: {
           from: { left: 0, top: "-20px" },
