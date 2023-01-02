@@ -1,14 +1,14 @@
 import reactLogo from "../assets/react.svg";
 
 interface IAtom {
-  order: number;
+  animation: number;
 }
 
 const Atom = (props: IAtom) => {
   const test = true;
 
   const getAnimation = () => {
-    switch (props.order) {
+    switch (props.animation) {
       case 1:
         return [
           "h-12 w-12 mx-[20px] my-[18px] absolute animate-bounce-x-1",

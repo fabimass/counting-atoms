@@ -10,6 +10,17 @@ const utils = {
   random: (min: number, max: number) =>
     min + Math.floor(Math.random() * (max - min + 1)),
 
+  // Given an array, shuffle it randomly
+  shuffle: (arr: number[]) => {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+    }
+    return arr;
+  },
+
   // Given an array of numbers and a max...
   // Pick a random sum (< max) from the set of all available sums in arr
   randomSumIn: (arr: number[], max: number) => {
