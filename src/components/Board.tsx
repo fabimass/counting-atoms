@@ -83,7 +83,7 @@ const Board = () => {
       <div className="md:flex">
         <div className="h-[280px] p-1 text-center border-solid border-2 border-slate-700 md:w-1/2">
           {gameStatus === "inProgress" ? (
-            <AtomsPanel quantity={numberOfAtoms} />
+            <AtomsPanel quantity={numberOfAtoms} difficulty={"hard"} />
           ) : (
             <PlayAgain
               onClick={resetGame}

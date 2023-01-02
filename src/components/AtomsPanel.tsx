@@ -4,6 +4,7 @@ import Atom from "./Atom";
 
 interface IAtomsPanel {
   quantity: number;
+  difficulty: "easy" | "normal" | "hard";
 }
 
 // This component is responsible for showing a passed number of atoms in the screen
@@ -26,7 +27,10 @@ const AtomsPanel = (props: IAtomsPanel) => {
   return (
     <div className="relative">
       {atoms.map((i) => (
-        <Atom key={i} animation={randomAnimations[i - 1]} />
+        <Atom
+          key={i}
+          animation={props.difficulty === "hard" ? randomAnimations[i - 1] : -1}
+        />
       ))}
     </div>
   );

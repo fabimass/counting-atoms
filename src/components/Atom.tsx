@@ -5,8 +5,6 @@ interface IAtom {
 }
 
 const Atom = (props: IAtom) => {
-  const test = true;
-
   const getAnimation = () => {
     switch (props.animation) {
       case 1:
@@ -55,21 +53,15 @@ const Atom = (props: IAtom) => {
           "absolute animate-bounce-y-9",
         ];
       default:
-        return ["", ""];
+        return ["h-12 w-12 mx-[20px] my-[18px] inline-block", ""];
     }
   };
 
   const [animated_container_1, animated_container_2] = getAnimation();
 
   return (
-    <div
-      className={
-        test
-          ? animated_container_1
-          : "h-12 w-12 mx-[20px] my-[18px] inline-block"
-      }
-    >
-      <div className={test ? animated_container_2 : ""}>
+    <div className={animated_container_1}>
+      <div className={animated_container_2}>
         <img src={reactLogo} className="h-12 w-12 animate-spin-slow" />
       </div>
     </div>
