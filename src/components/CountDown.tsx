@@ -3,12 +3,13 @@ import settings from "../settings";
 
 interface ICountDown {
   enabled: boolean;
+  difficulty: "easy" | "normal" | "hard";
   onTimeOut: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const CountDown = (props: ICountDown) => {
   const [secondsLeft, setSecondsLeft] = useState<number>(
-    settings.timeAvailable
+    settings.timeAvailable[props.difficulty]
   );
   const [clockEnabled, setClockEnabled] = useState(true);
 
@@ -31,7 +32,7 @@ const CountDown = (props: ICountDown) => {
   // Resets the timer
   useEffect(() => {
     if (props.enabled) {
-      setSecondsLeft(settings.timeAvailable);
+      setSecondsLeft(settings.timeAvailable[props.difficulty]);
       setClockEnabled(true);
     } else {
       setClockEnabled(false);

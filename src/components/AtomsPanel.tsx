@@ -29,7 +29,13 @@ const AtomsPanel = (props: IAtomsPanel) => {
       {atoms.map((i) => (
         <Atom
           key={i}
-          animation={props.difficulty === "hard" ? randomAnimations[i - 1] : -1}
+          animation={
+            props.difficulty === "hard"
+              ? randomAnimations[i - 1]
+              : props.difficulty === "normal"
+              ? 0
+              : -1
+          }
         />
       ))}
     </div>

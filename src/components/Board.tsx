@@ -5,13 +5,17 @@ import ButtonsPanel from "./ButtonsPanel";
 import PlayAgain from "./PlayAgain";
 import CountDown from "./CountDown";
 
+interface IBoard {
+  gameDifficulty: "easy" | "normal" | "hard";
+}
+
 // This component creates the panel for atoms and numbers and manages the game logic
-const Board = () => {
+const Board = (props: IBoard) => {
   // The state of the game is made up of:
   //   - The number of atoms to guess
   //   - The list of available numbers to click
   //   - The list of candidate numbers (clicked numbers but lower than the number of atoms)
-  //   - A flag thta indicates if the player ran out of time
+  //   - A flag that indicates if the player ran out of time
   const [numberOfAtoms, setNumberOfAtoms] = useState<number>(
     utils.random(1, 9)
   );
@@ -19,7 +23,7 @@ const Board = () => {
     utils.range(1, 9)
   );
   const [candidateNumbers, setCandidateNumbers] = useState<number[]>([]);
-  const [timeIsOut, setTimeIsOut] = useState(false);
+  const [timeIsOut, setTimeIsOut] = useState<boolean>(false);
 
   // Candidates are wrong if the sum of them is greater than the number of atoms
   const candidatesAreWrong = utils.sum(candidateNumbers) > numberOfAtoms;
@@ -83,7 +87,10 @@ const Board = () => {
       <div className="md:flex">
         <div className="h-[280px] p-1 text-center border-solid border-2 border-slate-700 md:w-1/2">
           {gameStatus === "inProgress" ? (
-            <AtomsPanel quantity={numberOfAtoms} difficulty={"hard"} />
+            <AtomsPanel
+              quantity={numberOfAtoms}
+              difficulty={props.gameDifficulty}
+            />
           ) : (
             <PlayAgain
               onClick={resetGame}
@@ -103,6 +110,7 @@ const Board = () => {
       <CountDown
         enabled={gameStatus === "inProgress" ? true : false}
         onTimeOut={setTimeIsOut}
+        difficulty={props.gameDifficulty}
       />
     </div>
   );
