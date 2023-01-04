@@ -1,5 +1,6 @@
 import { useState } from "react";
 import utils from "../utils";
+import settings from "../settings";
 import AtomsPanel from "./AtomsPanel";
 import ButtonsPanel from "./ButtonsPanel";
 import PlayAgain from "./PlayAgain";
@@ -17,10 +18,10 @@ const Board = (props: IBoard) => {
   //   - The list of candidate numbers (clicked numbers but lower than the number of atoms)
   //   - A flag that indicates if the player ran out of time
   const [numberOfAtoms, setNumberOfAtoms] = useState<number>(
-    utils.random(1, 9)
+    utils.random(1, settings.maxCount)
   );
   const [availableNumbers, setAvailableNumbers] = useState<number[]>(
-    utils.range(1, 9)
+    utils.range(1, settings.maxCount)
   );
   const [candidateNumbers, setCandidateNumbers] = useState<number[]>([]);
   const [timeIsOut, setTimeIsOut] = useState<boolean>(false);
@@ -38,8 +39,8 @@ const Board = (props: IBoard) => {
 
   // Reset game
   const resetGame = () => {
-    setNumberOfAtoms(utils.random(1, 9));
-    setAvailableNumbers(utils.range(1, 9));
+    setNumberOfAtoms(utils.random(1, settings.maxCount));
+    setAvailableNumbers(utils.range(1, settings.maxCount));
     setCandidateNumbers([]);
     setTimeIsOut(false);
   };
@@ -73,7 +74,9 @@ const Board = (props: IBoard) => {
       // We need to reset the list of candidates
       setCandidateNumbers([]);
       // And also, we need to update the number of atoms
-      setNumberOfAtoms(utils.randomSumIn(newAvailableNumbers, 9));
+      setNumberOfAtoms(
+        utils.randomSumIn(newAvailableNumbers, settings.maxCount)
+      );
     } else {
       // If not, the new number becomes part of the candidates list for good
       setCandidateNumbers(newCandidateNumbers);

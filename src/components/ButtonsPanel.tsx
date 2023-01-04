@@ -1,4 +1,5 @@
 import utils from "../utils";
+import settings from "../settings";
 import PlayButton from "./PlayButton";
 
 interface IButtonsPanel {
@@ -12,7 +13,7 @@ interface IButtonsPanel {
 }
 
 const ButtonsPanel = (props: IButtonsPanel) => {
-  const buttons = utils.range(1, 9);
+  const buttons = utils.range(1, settings.maxCount);
 
   const buttonStatus = (num: number) => {
     // The number is used if it's not in the availableNumbers array

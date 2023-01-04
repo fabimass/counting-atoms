@@ -4,6 +4,7 @@ const settings = {
     normal: 30,
     hard: 20,
   },
+  maxCount: 9,
 };
 
 export default settings;
