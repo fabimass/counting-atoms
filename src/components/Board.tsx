@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import utils from "../utils";
 import settings from "../settings";
 import AtomsPanel from "./AtomsPanel";
@@ -17,6 +17,7 @@ const Board = (props: IBoard) => {
   //   - The list of available numbers to click
   //   - The list of candidate numbers (clicked numbers but lower than the number of atoms)
   //   - A flag that indicates if the player ran out of time
+  //   - The current score
   const [numberOfAtoms, setNumberOfAtoms] = useState<number>(
     utils.random(1, settings.maxCount)
   );
@@ -25,6 +26,7 @@ const Board = (props: IBoard) => {
   );
   const [candidateNumbers, setCandidateNumbers] = useState<number[]>([]);
   const [timeIsOut, setTimeIsOut] = useState<boolean>(false);
+  const [playerScore, setPlayerScore] = useState<number>(0);
 
   // Candidates are wrong if the sum of them is greater than the number of atoms
   const candidatesAreWrong = utils.sum(candidateNumbers) > numberOfAtoms;
@@ -85,6 +87,10 @@ const Board = (props: IBoard) => {
     return null;
   };
 
+  const onTimeRequest = (time: number) => {
+    console.log("get time", time);
+  };
+
   return (
     <div className="max-w-[700px]">
       <div className="md:flex">
@@ -113,7 +119,9 @@ const Board = (props: IBoard) => {
       <CountDown
         enabled={gameStatus === "inProgress" ? true : false}
         onTimeOut={setTimeIsOut}
-        difficulty={props.gameDifficulty}
+        maxValue={settings.timeAvailable[props.gameDifficulty]}
+        timeRequester={availableNumbers}
+        onTimeRequest={onTimeRequest}
       />
     </div>
   );

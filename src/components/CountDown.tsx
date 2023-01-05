@@ -3,14 +3,14 @@ import settings from "../settings";
 
 interface ICountDown {
   enabled: boolean;
-  difficulty: "easy" | "normal" | "hard";
-  onTimeOut: React.Dispatch<React.SetStateAction<boolean>>;
+  maxValue: number;
+  onTimeOut: (timeout: boolean) => void;
+  timeRequester: any;
+  onTimeRequest: (time: number) => void;
 }
 
 const CountDown = (props: ICountDown) => {
-  const [secondsLeft, setSecondsLeft] = useState<number>(
-    settings.timeAvailable[props.difficulty]
-  );
+  const [secondsLeft, setSecondsLeft] = useState<number>(props.maxValue);
   const [clockEnabled, setClockEnabled] = useState(true);
 
   // Countdown timer
@@ -32,12 +32,19 @@ const CountDown = (props: ICountDown) => {
   // Resets the timer
   useEffect(() => {
     if (props.enabled) {
-      setSecondsLeft(settings.timeAvailable[props.difficulty]);
+      setSecondsLeft(props.maxValue);
       setClockEnabled(true);
     } else {
       setClockEnabled(false);
     }
   }, [props.enabled]);
+
+  // Returns the current time
+  useEffect(() => {
+    if (clockEnabled) {
+      props.onTimeRequest(secondsLeft);
+    }
+  }, [props.timeRequester, clockEnabled]);
 
   return (
     <div className="relative mx-auto mt-5 md:mt-10 w-16 h-16 md:w-28 md:h-28">
