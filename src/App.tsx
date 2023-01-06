@@ -1,12 +1,13 @@
 import { useState } from "react";
 import "./App.css";
 import Board from "./components/Board";
+import DifficultySelector from "./components/DifficultySelector";
 import axios from "axios";
 
 function App() {
   const [gameDifficulty, setGameDifficulty] = useState<
     "easy" | "normal" | "hard" | "unknown"
-  >("easy");
+  >("unknown");
 
   // API call
   const getLeaderboard = async () => {
@@ -16,19 +17,22 @@ function App() {
     console.log(response);
   };
 
-  getLeaderboard();
+  //getLeaderboard();
 
   return (
     <>
       <h1 className="text-3xl md:text-5xl">Counting Atoms Game</h1>
       {gameDifficulty === "unknown" ? (
-        "select difficulty"
+        <DifficultySelector onSelect={setGameDifficulty} />
       ) : (
         <>
           <p className="p-5 md:p-10">
             Pick one or more numbers that sum to the number of React atoms
           </p>
-          <Board gameDifficulty={gameDifficulty} />
+          <Board
+            gameDifficulty={gameDifficulty}
+            resetGameDifficulty={setGameDifficulty}
+          />
         </>
       )}
     </>

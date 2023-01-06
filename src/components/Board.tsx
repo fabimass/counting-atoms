@@ -8,6 +8,9 @@ import CountDown from "./CountDown";
 
 interface IBoard {
   gameDifficulty: "easy" | "normal" | "hard";
+  resetGameDifficulty: React.Dispatch<
+    React.SetStateAction<"easy" | "normal" | "hard" | "unknown">
+  >;
 }
 
 // This component creates the panel for atoms and numbers and manages the game logic
@@ -45,6 +48,7 @@ const Board = (props: IBoard) => {
     setAvailableNumbers(utils.range(1, settings.maxCount));
     setCandidateNumbers([]);
     setTimeIsOut(false);
+    props.resetGameDifficulty("unknown");
   };
 
   // Logic behind every click
