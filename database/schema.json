@@ -1,0 +1,24 @@
+{
+  "leaderboard": [
+    {
+      "name": "Player1",
+      "points": 2000
+    },
+    {
+      "name": "Player2",
+      "points": 1000
+    },
+    {
+      "name": "Player3",
+      "points": 500
+    },
+    {
+      "name": "Player4",
+      "points": 200
+    },
+    {
+      "name": "Player5",
+      "points": 100
+    }
+  ]
+}
