@@ -17,6 +17,7 @@ jobs:
         uses: SpicyPizza/create-envfile@v1.3
         with:
           envkey_VITE_FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+          envkey_VITE_FIREBASE_API_URL: "https://counting-atoms-default-rtdb.firebaseio.com"
           file_name: .env
       - name: Run deploy
         run: |

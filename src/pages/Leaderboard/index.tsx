@@ -4,7 +4,7 @@ const Leaderboard = () => {
   // API call
   const getLeaderboard = async () => {
     const response = await axios.get(
-      "https://counting-atoms-default-rtdb.firebaseio.com/leaderboard.json"
+      `${import.meta.env.VITE_FIREBASE_API_URL}/leaderboard.json`
     );
     console.log(response);
   };
