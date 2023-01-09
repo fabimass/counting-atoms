@@ -1,0 +1,17 @@
+{
+  "rules": {
+    "leaderboard": {
+      ".read": true,
+      ".write": "auth != null",
+      "$player": {
+        ".validate": "newData.hasChildren(['name','points'])",
+        "name": {
+          ".validate": "newData.isString() && newData.val().length < 10"
+        },
+        "points": {
+          ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 10000"
+        }
+      }
+    }
+  }
+}
