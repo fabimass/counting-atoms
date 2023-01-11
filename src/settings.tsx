@@ -5,6 +5,11 @@ const settings = {
     hard: 20,
   },
   maxCount: 9,
+  scoreModifier: {
+    easy: 1,
+    normal: 1.5,
+    hard: 2.5,
+  },
 };
 
 export default settings;

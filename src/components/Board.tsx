@@ -21,6 +21,7 @@ const Board = (props: IBoard) => {
   //   - The list of candidate numbers (clicked numbers but lower than the number of atoms)
   //   - A flag that indicates if the player ran out of time
   //   - The current score
+  //   - The available time when a hit was made
   const [numberOfAtoms, setNumberOfAtoms] = useState<number>(
     utils.random(1, settings.maxCount)
   );
@@ -30,6 +31,9 @@ const Board = (props: IBoard) => {
   const [candidateNumbers, setCandidateNumbers] = useState<number[]>([]);
   const [timeIsOut, setTimeIsOut] = useState<boolean>(false);
   const [playerScore, setPlayerScore] = useState<number>(0);
+  const [timeSnapshot, setTimeSnapshot] = useState<number>(
+    settings.timeAvailable[props.gameDifficulty]
+  );
 
   // Candidates are wrong if the sum of them is greater than the number of atoms
   const candidatesAreWrong = utils.sum(candidateNumbers) > numberOfAtoms;
@@ -48,6 +52,7 @@ const Board = (props: IBoard) => {
     setAvailableNumbers(utils.range(1, settings.maxCount));
     setCandidateNumbers([]);
     setTimeIsOut(false);
+    setPlayerScore(0);
     props.resetGameDifficulty("unknown");
   };
 
@@ -91,12 +96,25 @@ const Board = (props: IBoard) => {
     return null;
   };
 
-  const onTimeRequest = (time: number) => {
-    console.log("get time", time);
+  // Add points to the score when a new hit is made
+  const calculateScore = (time: number) => {
+    // This constraint is to prevent adding to the score in the first render
+    if (time < settings.timeAvailable[props.gameDifficulty]) {
+      // The score is calculated taking into account the difficulty, the numbers the player already guessed, and the remaining time available.
+      // The more you progress the more points you get. The quicker you are the more points you get.
+      const baseMod = 100;
+      const difficultyMod = settings.scoreModifier[props.gameDifficulty];
+      const timeMod = 1 + 1 / (timeSnapshot - time);
+      const hitsMod = 1 + (settings.maxCount - availableNumbers.length) / 10;
+      const newScore = Math.round(baseMod * difficultyMod * timeMod * hitsMod);
+      setTimeSnapshot(time);
+      setPlayerScore((prevScore) => prevScore + newScore);
+    }
   };
 
   return (
     <div className="mx-auto max-w-[306px] md:max-w-[700px]">
+      <p>Score: {playerScore}</p>
       <div className="md:flex">
         <div className="h-[280px] p-1 text-center border-solid border-2 border-slate-700 md:w-1/2">
           {gameStatus === "inProgress" ? (
@@ -125,7 +143,7 @@ const Board = (props: IBoard) => {
         onTimeOut={setTimeIsOut}
         maxValue={settings.timeAvailable[props.gameDifficulty]}
         timeRequester={availableNumbers}
-        onTimeRequest={onTimeRequest}
+        onTimeRequest={calculateScore}
       />
     </div>
   );
