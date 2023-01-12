@@ -1,16 +1,6 @@
 import axios from "axios";
 
 const Leaderboard = () => {
-  // API call
-  const getLeaderboard = async () => {
-    const response = await axios.get(
-      `${import.meta.env.VITE_FIREBASE_API_URL}/leaderboard.json`
-    );
-    console.log(response);
-  };
-
-  //getLeaderboard();
-
   const updateLeaderboard = () => {
     const response = axios
       .post(

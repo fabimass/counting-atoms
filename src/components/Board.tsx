@@ -5,6 +5,9 @@ import AtomsPanel from "./AtomsPanel";
 import ButtonsPanel from "./ButtonsPanel";
 import PlayAgain from "./PlayAgain";
 import CountDown from "./CountDown";
+import getLeaderboard from "../services/getLeaderboard";
+import checkLeaderboard from "../services/checkLeaderboard";
+import { Fireworks } from "@fireworks-js/react";
 
 interface IBoard {
   gameDifficulty: "easy" | "normal" | "hard";
@@ -22,6 +25,7 @@ const Board = (props: IBoard) => {
   //   - A flag that indicates if the player ran out of time
   //   - The current score
   //   - The available time when a hit was made
+  //   - A flag that indicates if the player made it to the leaderboard
   const [numberOfAtoms, setNumberOfAtoms] = useState<number>(
     utils.random(1, settings.maxCount)
   );
@@ -34,6 +38,8 @@ const Board = (props: IBoard) => {
   const [timeSnapshot, setTimeSnapshot] = useState<number>(
     settings.timeAvailable[props.gameDifficulty]
   );
+  const [playerIntoLeaderboard, setPlayerIntoLeaderboard] =
+    useState<boolean>(false);
 
   // Candidates are wrong if the sum of them is greater than the number of atoms
   const candidatesAreWrong = utils.sum(candidateNumbers) > numberOfAtoms;
@@ -53,6 +59,7 @@ const Board = (props: IBoard) => {
     setCandidateNumbers([]);
     setTimeIsOut(false);
     setPlayerScore(0);
+    setPlayerIntoLeaderboard(false);
     props.resetGameDifficulty("unknown");
   };
 
@@ -112,9 +119,43 @@ const Board = (props: IBoard) => {
     }
   };
 
+  // Checks the leaderboard if the game is won
+  useEffect(() => {
+    if (gameStatus === "Won") {
+      getLeaderboard()
+        .then((data) => checkLeaderboard(playerScore, data))
+        .then((pos) => {
+          if (pos > 0) {
+            setPlayerIntoLeaderboard(true);
+          }
+        });
+    }
+  }, [gameStatus]);
+
   return (
     <div className="mx-auto max-w-[306px] md:max-w-[700px]">
       <p>Score: {playerScore}</p>
+      {playerIntoLeaderboard === true ? (
+        <>
+          <p>Made it to the leadearboard!!</p>
+          <Fireworks
+            options={{
+              rocketsPoint: {
+                min: 0,
+                max: 100,
+              },
+            }}
+            style={{
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              position: "fixed",
+              zIndex: -1,
+            }}
+          />
+        </>
+      ) : null}
       <div className="md:flex">
         <div className="h-[280px] p-1 text-center border-solid border-2 border-slate-700 md:w-1/2">
           {gameStatus === "inProgress" ? (
