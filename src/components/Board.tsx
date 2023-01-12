@@ -111,7 +111,8 @@ const Board = (props: IBoard) => {
       // The more you progress the more points you get. The quicker you are the more points you get.
       const baseMod = 100;
       const difficultyMod = settings.scoreModifier[props.gameDifficulty];
-      const timeMod = 1 + 1 / (timeSnapshot - time);
+      const timeMod =
+        timeSnapshot - time > 0 ? 1 + 1 / (timeSnapshot - time) : 0.1;
       const hitsMod = 1 + (settings.maxCount - availableNumbers.length) / 10;
       const newScore = Math.round(baseMod * difficultyMod * timeMod * hitsMod);
       setTimeSnapshot(time);
