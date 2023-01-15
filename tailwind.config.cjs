@@ -2,6 +2,11 @@
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    fontFamily: {
+      goudy: ["Goudy Old Style"],
+      brush: ["Brush Script MT"],
+      papyrus: ["Papyrus"],
+    },
     extend: {
       animation: {
         "spin-slow": "spin 10s linear infinite",
