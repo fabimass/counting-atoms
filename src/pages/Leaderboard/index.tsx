@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import getLeaderboard from "../../services/getLeaderboard";
 import Medal from "../../components/Medal";
-import Atom from "../../components/Atom";
 
-const Leaderboard = () => {
+interface ILeaderboard {
+  pageRouter: (page: string) => void;
+}
+
+const Leaderboard = (props: ILeaderboard) => {
   const [table, setTable] = useState(null);
   /*
   const updateLeaderboard = () => {

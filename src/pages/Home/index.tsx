@@ -2,7 +2,11 @@ import { useState } from "react";
 import Board from "../../components/Board";
 import DifficultySelector from "../../components/DifficultySelector";
 
-const Home = () => {
+interface IHome {
+  pageRouter: (page: string) => void;
+}
+
+const Home = (props: IHome) => {
   const [gameDifficulty, setGameDifficulty] = useState<
     "easy" | "normal" | "hard" | "unknown"
   >("unknown");
