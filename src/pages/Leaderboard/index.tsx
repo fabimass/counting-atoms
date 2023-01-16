@@ -26,9 +26,15 @@ const Leaderboard = (props: ILeaderboard) => {
     getLeaderboard().then((data) => setTable(data));
   }, []);
 
+  const returnHome = () => {
+    props.pageRouter("home");
+  };
+
   return (
     <>
-      <h1 className="text-3xl md:text-5xl font-goudy mx-auto">LEADERBOARD</h1>
+      <h1 className="text-3xl md:text-5xl font-papyrus text-teal-400 mx-auto">
+        LEADERBOARD
+      </h1>
       <table className="mx-auto text-md md:text-2xl font-papyrus border-separate border-spacing-y-10">
         <thead>
           <tr>
@@ -51,6 +57,21 @@ const Leaderboard = (props: ILeaderboard) => {
             : null}
         </tbody>
       </table>
+      <div
+        onClick={returnHome}
+        className="button h-12 w-[50%] mx-auto font-papyrus
+            bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 
+            rounded-full cursor-pointer select-none
+            active:translate-y-2 
+            transition-all duration-150 
+            [box-shadow:0_8px_0_0_#1b6ff8,0_12px_0_0_#1b70f841]
+            active:[box-shadow:0_0px_0_0_#1b6ff8,0_0px_0_0_#1b70f841]
+            border-[1px] border-blue-400"
+      >
+        <span className="flex flex-col justify-center items-center h-full text-white text-lg ">
+          Play
+        </span>
+      </div>
     </>
   );
 };
