@@ -32,10 +32,10 @@ const Leaderboard = (props: ILeaderboard) => {
 
   return (
     <>
-      <h1 className="text-3xl md:text-5xl font-papyrus text-teal-400 mx-auto">
+      <h1 className="text-4xl md:text-5xl font-gruppo text-teal-400 mx-auto">
         LEADERBOARD
       </h1>
-      <table className="mx-auto text-md md:text-2xl font-papyrus border-separate border-spacing-y-10">
+      <table className="mx-auto text-md md:text-2xl font-gruppo border-separate border-spacing-y-8">
         <thead>
           <tr>
             <th className="w-[400px]">Position</th>
@@ -46,7 +46,7 @@ const Leaderboard = (props: ILeaderboard) => {
         <tbody>
           {table
             ? Object.entries(table).map(([player, data]: any, i) => (
-                <tr key={i}>
+                <tr className="h-[50px]" key={i}>
                   <td>
                     <Medal place={i + 1} />
                   </td>
@@ -59,7 +59,7 @@ const Leaderboard = (props: ILeaderboard) => {
       </table>
       <div
         onClick={returnHome}
-        className="button h-12 w-[50%] mx-auto font-papyrus
+        className="button h-12 w-[50%] mx-auto font-gruppo mt-5
             bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 
             rounded-full cursor-pointer select-none
             active:translate-y-2 
