@@ -3,7 +3,7 @@ import getLeaderboard from "../../services/getLeaderboard";
 import Medal from "../../components/Medal";
 
 interface ILeaderboard {
-  pageRouter: (page: string) => void;
+  setPage: (page: string) => void;
 }
 
 const Leaderboard = (props: ILeaderboard) => {
@@ -25,10 +25,6 @@ const Leaderboard = (props: ILeaderboard) => {
   useEffect(() => {
     getLeaderboard().then((data) => setTable(data));
   }, []);
-
-  const returnHome = () => {
-    props.pageRouter("home");
-  };
 
   return (
     <>
@@ -58,7 +54,7 @@ const Leaderboard = (props: ILeaderboard) => {
         </tbody>
       </table>
       <div
-        onClick={returnHome}
+        onClick={() => props.setPage("home")}
         className="button h-12 w-[50%] mx-auto font-gruppo mt-5
             bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 
             rounded-full cursor-pointer select-none

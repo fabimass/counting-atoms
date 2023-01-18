@@ -11,11 +11,11 @@ function App() {
   return (
     <>
       {page === "home" ? (
-        <Home pageRouter={setPage} setPlayerName={setPlayerName} />
+        <Home setPage={setPage} setPlayerName={setPlayerName} />
       ) : page === "leaderboard" ? (
-        <Leaderboard pageRouter={setPage} />
+        <Leaderboard setPage={setPage} />
       ) : page === "game" ? (
-        <Game pageRouter={setPage} />
+        <Game setPage={setPage} />
       ) : null}
     </>
   );

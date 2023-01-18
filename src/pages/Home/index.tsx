@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 interface IHome {
-  pageRouter: (page: string) => void;
+  setPage: (page: string) => void;
   setPlayerName: (name: string) => void;
 }
 
@@ -16,7 +16,7 @@ const Home = (props: IHome) => {
       ></input>
 
       <div
-        onClick={() => props.pageRouter("game")}
+        onClick={() => props.setPage("game")}
         className="button h-12 w-[50%] mx-auto font-gruppo mt-20
             bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 
             rounded-full cursor-pointer select-none

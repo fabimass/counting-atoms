@@ -3,7 +3,7 @@ import Board from "../../components/Board";
 import DifficultySelector from "../../components/DifficultySelector";
 
 interface IGame {
-  pageRouter: (page: string) => void;
+  setPage: (page: string) => void;
 }
 
 const Game = (props: IGame) => {
