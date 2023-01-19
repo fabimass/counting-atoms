@@ -8,12 +8,10 @@ import CountDown from "./CountDown";
 import getLeaderboard from "../services/getLeaderboard";
 import checkLeaderboard from "../services/checkLeaderboard";
 import { Fireworks } from "@fireworks-js/react";
+import { difficultyOptions } from "../App";
 
 interface IBoard {
-  gameDifficulty: "easy" | "normal" | "hard";
-  resetGameDifficulty: React.Dispatch<
-    React.SetStateAction<"easy" | "normal" | "hard" | "unknown">
-  >;
+  gameDifficulty: difficultyOptions;
 }
 
 // This component creates the panel for atoms and numbers and manages the game logic
@@ -60,7 +58,6 @@ const Board = (props: IBoard) => {
     setTimeIsOut(false);
     setPlayerScore(0);
     setPlayerIntoLeaderboard(false);
-    props.resetGameDifficulty("unknown");
   };
 
   // Logic behind every click

@@ -1,32 +1,21 @@
-import { useState } from "react";
 import Board from "../../components/Board";
-import DifficultySelector from "../../components/DifficultySelector";
+import { difficultyOptions, pageOptions } from "../../App";
 
 interface IGame {
-  setPage: (page: string) => void;
+  setPage: (page: pageOptions) => void;
+  playerName: string;
+  gameDifficulty: difficultyOptions;
 }
 
 const Game = (props: IGame) => {
-  const [gameDifficulty, setGameDifficulty] = useState<
-    "easy" | "normal" | "hard" | "unknown"
-  >("unknown");
-
   return (
     <>
       <h1 className="text-3xl md:text-5xl">Counting Atoms Game</h1>
-      {gameDifficulty === "unknown" ? (
-        <DifficultySelector onSelect={setGameDifficulty} />
-      ) : (
-        <>
-          <p className="p-5 md:p-10">
-            Pick one or more numbers that sum to the number of React atoms
-          </p>
-          <Board
-            gameDifficulty={gameDifficulty}
-            resetGameDifficulty={setGameDifficulty}
-          />
-        </>
-      )}
+
+      <p className="p-5 md:p-10">
+        Pick one or more numbers that sum to the number of React atoms
+      </p>
+      <Board gameDifficulty={props.gameDifficulty} />
     </>
   );
 };

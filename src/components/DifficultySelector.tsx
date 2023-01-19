@@ -1,12 +1,11 @@
-interface IDifficultSelector {
-  onSelect: React.Dispatch<
-    React.SetStateAction<"easy" | "normal" | "hard" | "unknown">
-  >;
+import { difficultyOptions } from "../App";
+
+interface IDifficultySelector {
+  onSelect: (difficulty: difficultyOptions) => void;
 }
-const DifficultySelector = (props: IDifficultSelector) => {
+const DifficultySelector = (props: IDifficultySelector) => {
   return (
     <>
-      <p className="p-5 md:p-10">Pick your difficulty</p>
       <div
         className="button h-12
         bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:from-green-200 hover:via-green-300 hover:to-green-400 rounded-full cursor-pointer select-none

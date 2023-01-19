@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import getLeaderboard from "../../services/getLeaderboard";
 import Medal from "../../components/Medal";
+import { pageOptions } from "../../App";
 
 interface ILeaderboard {
-  setPage: (page: string) => void;
+  onSubmit: (page: pageOptions) => void;
 }
 
 const Leaderboard = (props: ILeaderboard) => {
@@ -54,7 +55,7 @@ const Leaderboard = (props: ILeaderboard) => {
         </tbody>
       </table>
       <div
-        onClick={() => props.setPage("home")}
+        onClick={() => props.onSubmit("home")}
         className="button h-12 w-[50%] mx-auto font-gruppo mt-5
             bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 
             rounded-full cursor-pointer select-none
