@@ -5,6 +5,7 @@ import { pageOptions } from "../../App";
 
 interface ILeaderboard {
   onSubmit: (page: pageOptions) => void;
+  onLoad: () => void;
 }
 
 const Leaderboard = (props: ILeaderboard) => {
@@ -25,6 +26,7 @@ const Leaderboard = (props: ILeaderboard) => {
   // Download the leaderboard data
   useEffect(() => {
     getLeaderboard().then((data) => setTable(data));
+    props.onLoad();
   }, []);
 
   return (
