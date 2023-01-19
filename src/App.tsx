@@ -29,7 +29,7 @@ function App() {
   // Open the game after picking difficulty
   useEffect(() => {
     if (gameDifficulty) {
-      setPage("leaderboard");
+      setPage("game");
     }
   }, [gameDifficulty]);
 

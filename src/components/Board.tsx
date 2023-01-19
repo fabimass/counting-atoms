@@ -132,10 +132,10 @@ const Board = (props: IBoard) => {
 
   return (
     <div className="mx-auto max-w-[306px] md:max-w-[700px]">
-      <p>Score: {playerScore}</p>
+      <p className="font-gruppo">Score: {playerScore}</p>
       {playerIntoLeaderboard === true ? (
         <>
-          <p>Made it to the leadearboard!!</p>
+          <p className="font-gruppo">Made it to the leadearboard!!</p>
           <Fireworks
             options={{
               rocketsPoint: {

@@ -5,12 +5,18 @@ interface IPlayAgain {
 
 const GameWon = () => {
   return (
-    <div className="text-green-400 font-bold text-3xl my-10">Game Won!!</div>
+    <div className="text-green-400 font-bold text-3xl my-10 font-gruppo">
+      Game Won!!
+    </div>
   );
 };
 
 const GameOver = () => {
-  return <div className="text-red-500 font-bold text-3xl my-10">Game Over</div>;
+  return (
+    <div className="text-red-500 font-bold text-3xl my-10 font-gruppo">
+      Game Over
+    </div>
+  );
 };
 
 const PlayAgain = (props: IPlayAgain) => {
@@ -28,7 +34,7 @@ const PlayAgain = (props: IPlayAgain) => {
             active:[box-shadow:0_0px_0_0_#1b6ff8,0_0px_0_0_#1b70f841]
             border-[1px] border-blue-400"
       >
-        <span className="flex flex-col justify-center items-center h-full text-white text-lg ">
+        <span className="flex flex-col justify-center items-center h-full text-white text-lg font-gruppo">
           Play again
         </span>
       </div>
