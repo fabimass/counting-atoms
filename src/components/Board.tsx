@@ -7,11 +7,13 @@ import PlayAgain from "./PlayAgain";
 import CountDown from "./CountDown";
 import getLeaderboard from "../services/getLeaderboard";
 import checkLeaderboard from "../services/checkLeaderboard";
+import updateLeaderboard from "../services/updateLeaderboard";
 import { Fireworks } from "@fireworks-js/react";
 import { difficultyOptions } from "../App";
 
 interface IBoard {
   gameDifficulty: difficultyOptions;
+  playerName: string;
 }
 
 // This component creates the panel for atoms and numbers and manages the game logic
@@ -125,6 +127,7 @@ const Board = (props: IBoard) => {
         .then((pos) => {
           if (pos > 0) {
             setPlayerIntoLeaderboard(true);
+            updateLeaderboard(props.playerName, playerScore, pos);
           }
         });
     }

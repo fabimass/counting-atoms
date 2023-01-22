@@ -15,7 +15,10 @@ const Game = (props: IGame) => {
       <p className="p-5 md:p-10 font-gruppo">
         Pick one or more numbers that sum to the number of React atoms
       </p>
-      <Board gameDifficulty={props.gameDifficulty} />
+      <Board
+        gameDifficulty={props.gameDifficulty}
+        playerName={props.playerName}
+      />
     </>
   );
 };
