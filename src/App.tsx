@@ -14,38 +14,29 @@ function App() {
   const [gameDifficulty, setGameDifficulty] =
     useState<difficultyOptions | null>(null);
 
-  const resetState = () => {
-    setPlayerName(null);
-    setGameDifficulty(null);
+  const submitName = (name: string) => {
+    setPlayerName(name);
+    setPage("difficulty");
   };
 
-  // Show the difficulty picker after submitting a name
-  useEffect(() => {
-    if (playerName) {
-      setPage("difficulty");
-    }
-  }, [playerName]);
-
-  // Open the game after picking difficulty
-  useEffect(() => {
-    if (gameDifficulty) {
-      setPage("game");
-    }
-  }, [gameDifficulty]);
+  const submitDifficulty = (difficulty: difficultyOptions) => {
+    setGameDifficulty(difficulty);
+    setPage("game");
+  };
 
   return (
     <>
       {page === "home" ? (
-        <Home onSubmit={setPlayerName} />
+        <Home onSubmit={submitName} />
       ) : page === "difficulty" ? (
-        <Difficulty onSubmit={setGameDifficulty} />
+        <Difficulty onSubmit={submitDifficulty} />
       ) : page === "leaderboard" ? (
-        <Leaderboard onSubmit={setPage} onLoad={resetState} />
+        <Leaderboard onExit={setPage} />
       ) : page === "game" ? (
         <Game
           playerName={playerName ? playerName : "Unknown"}
           gameDifficulty={gameDifficulty ? gameDifficulty : "normal"}
-          setPage={setPage}
+          onExit={setPage}
         />
       ) : null}
     </>

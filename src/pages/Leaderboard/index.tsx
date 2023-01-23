@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import getLeaderboard from "../../services/getLeaderboard";
 import Medal from "../../components/Medal";
-import { pageOptions } from "../../App";
 
 interface ILeaderboard {
-  onSubmit: (page: pageOptions) => void;
-  onLoad: () => void;
+  onExit: any;
 }
 
 const Leaderboard = (props: ILeaderboard) => {
@@ -22,11 +20,10 @@ const Leaderboard = (props: ILeaderboard) => {
   };
 
   updateLeaderboard();*/
-
+  console.log("en el leaderboard");
   // Download the leaderboard data
   useEffect(() => {
     getLeaderboard().then((data) => setTable(data));
-    props.onLoad();
   }, []);
 
   return (
@@ -57,7 +54,7 @@ const Leaderboard = (props: ILeaderboard) => {
         </tbody>
       </table>
       <div
-        onClick={() => props.onSubmit("home")}
+        onClick={() => props.onExit("home")}
         className="button h-12 w-[50%] mx-auto font-gruppo mt-5
             bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 
             rounded-full cursor-pointer select-none

@@ -9,11 +9,12 @@ import getLeaderboard from "../services/getLeaderboard";
 import checkLeaderboard from "../services/checkLeaderboard";
 import updateLeaderboard from "../services/updateLeaderboard";
 import { Fireworks } from "@fireworks-js/react";
-import { difficultyOptions } from "../App";
+import { difficultyOptions, pageOptions } from "../App";
 
 interface IBoard {
   gameDifficulty: difficultyOptions;
   playerName: string;
+  onExit: (page: pageOptions) => void;
 }
 
 // This component creates the panel for atoms and numbers and manages the game logic
@@ -60,6 +61,14 @@ const Board = (props: IBoard) => {
     setTimeIsOut(false);
     setPlayerScore(0);
     setPlayerIntoLeaderboard(false);
+  };
+
+  const goToLeaderboard = () => {
+    props.onExit("leaderboard");
+  };
+
+  const goToDifficultyPicker = () => {
+    props.onExit("difficulty");
   };
 
   // Logic behind every click
@@ -166,7 +175,9 @@ const Board = (props: IBoard) => {
             />
           ) : (
             <PlayAgain
-              onClick={resetGame}
+              onPlayAgain={resetGame}
+              onChangeDifficulty={goToDifficultyPicker}
+              onViewLeaderboard={goToLeaderboard}
               gameWon={gameStatus === "Won" ? true : false}
             />
           )}
