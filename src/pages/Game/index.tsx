@@ -132,10 +132,10 @@ const Game = (props: IGame) => {
     if (gameStatus === "Won") {
       getLeaderboard()
         .then((data) => checkLeaderboard(playerScore, data))
-        .then((pos) => {
+        .then(([pos, leaderboard]) => {
           if (pos > 0) {
             setPlayerIntoLeaderboard(true);
-            updateLeaderboard(props.playerName, playerScore, pos);
+            updateLeaderboard(props.playerName, playerScore, pos, leaderboard);
           }
         });
     }

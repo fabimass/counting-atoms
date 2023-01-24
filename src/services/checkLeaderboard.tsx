@@ -2,12 +2,14 @@
 // Returns the position that the player should take in the leaderboard or 0 if not applies.
 const checkLeaderboard = (score: number, leaderboard: any) => {
   const players = Object.keys(leaderboard);
+  let position = 0;
   for (let i = 0; i < players.length; i++) {
     if (score > leaderboard[players[i]].points) {
-      return i + 1;
+      position = i + 1;
+      break;
     }
   }
-  return 0;
+  return [position, leaderboard];
 };
 
 export default checkLeaderboard;
