@@ -8,19 +8,7 @@ interface ILeaderboard {
 
 const Leaderboard = (props: ILeaderboard) => {
   const [table, setTable] = useState(null);
-  /*
-  const updateLeaderboard = () => {
-    const response = axios
-      .post(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${
-          import.meta.env.VITE_FIREBASE_API_KEY
-        }`
-      )
-      .then((resp) => console.log(resp.data.idToken));
-  };
 
-  updateLeaderboard();*/
-  console.log("en el leaderboard");
   // Download the leaderboard data
   useEffect(() => {
     getLeaderboard().then((data) => setTable(data));

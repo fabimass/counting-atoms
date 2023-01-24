@@ -139,7 +139,7 @@ const Game = (props: IGame) => {
           }
         });
     }
-  }, [gameStatus]);
+  }, [playerScore]);
 
   return (
     <>
