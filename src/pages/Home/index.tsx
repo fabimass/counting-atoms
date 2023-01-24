@@ -12,6 +12,7 @@ const Home = (props: IHome) => {
       <h1 className="text-3xl md:text-5xl font-gruppo">Counting Atoms Game</h1>
       <p className="p-5 md:p-10 text-xl font-gruppo">What's your name?</p>
       <input
+        type="text"
         className="px-10 py-2 border-solid border-2 border-gray-400 rounded-full"
         onChange={(e) => setPlayerName(e.target.value)}
       ></input>
