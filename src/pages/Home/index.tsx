@@ -13,7 +13,7 @@ const Home = (props: IHome) => {
       <p className="p-5 md:p-10 text-xl font-gruppo">What's your name?</p>
       <input
         type="text"
-        className="px-10 py-2 border-solid border-2 border-gray-400 rounded-full"
+        className="px-10 py-2 border-solid border-2 border-gray-400 rounded-full bg-transparent"
         onChange={(e) => setPlayerName(e.target.value)}
       ></input>
       {playerName != "" && playerName.length < 10 ? (
